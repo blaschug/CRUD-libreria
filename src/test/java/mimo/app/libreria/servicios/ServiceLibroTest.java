@@ -35,9 +35,9 @@ public class ServiceLibroTest {
     public void buscaPorId_conIdNoExistente_retornaNull() throws LibroRepositoryExeption {
         long id = -1;
 
-        Libro libro = serviceLibro.buscaPorId(id);
-
-        assertThat(libro).isNull();
+        assertThatThrownBy(() -> {
+            serviceLibro.buscaPorId(id);
+        }).isInstanceOf(LibroRepositoryExeption.class).hasMessageContaining("No se encuentra un libro con ese ID");
     }
 
     @Test
@@ -250,7 +250,7 @@ public class ServiceLibroTest {
     public void modificaLibro_conLibroExistenteYParametrosValidos_esVoid() throws Exception {
         long id = 1;
         long isbn = 150;
-        String titulo = "La bestia";
+        String titulo = "Locuras Graficas";
         int anio = 1980;
         int ejemplares = 50;
         int ejemplaresPrestados = 20;
@@ -280,7 +280,7 @@ public class ServiceLibroTest {
         assertThatThrownBy(() -> {
             serviceLibro.modificar(serviceLibro.buscaPorId(id), isbn, titulo, anio, ejemplares,
                     ejemplaresPrestados, autor, editorial);
-        }).isInstanceOf(LibroRepositoryExeption.class).hasMessageContaining("No se encontro un Libro con esa ID");
+        }).isInstanceOf(LibroRepositoryExeption.class).hasMessageContaining("No se encuentra un libro con ese ID");
     }
 }
 
