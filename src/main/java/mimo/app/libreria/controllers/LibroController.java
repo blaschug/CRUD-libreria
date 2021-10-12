@@ -18,10 +18,8 @@ public class LibroController {
     }
 
     @GetMapping("/buscar/libros")
-    public String buscarLibros(Model model, @RequestParam(required = false) String atributos, @RequestParam(required
-            = false) String buscador) {
-        System.out.println(atributos);
-        System.out.println(buscador);
+    public String buscarLibros(Model model, @RequestParam(required = false) String atributos,
+            @RequestParam(required = false) String buscador) {
 
         if (atributos != null) {
             if (atributos.equals("isbn")) {
@@ -57,9 +55,8 @@ public class LibroController {
 
     @PostMapping(value = "/cargar/libros")
     public String cargarAutores(ModelMap model, @RequestParam long isbn, @RequestParam String nombre,
-                                @RequestParam int anio, @RequestParam int ejemplares,
-                                @RequestParam int ejemplaresPrestados, @RequestParam String autor,
-                                @RequestParam String editorial) {
+            @RequestParam int anio, @RequestParam int ejemplares, @RequestParam int ejemplaresPrestados,
+            @RequestParam String autor, @RequestParam String editorial) {
         try {
             serviceLibro.guardar(isbn, nombre, anio, ejemplares, ejemplaresPrestados, autor, editorial);
         } catch (Exception e) {
@@ -71,30 +68,24 @@ public class LibroController {
         return "cargadoSatisfactoriamente";
     }
 
-//    @GetMapping(value = "/modificar/libros")
-//    public String modificar(ModelMap model) {
-//        model.addAttribute("libros", serviceLibro.buscarTodos());
-//        return "modificarLibros";
-//    }
+    // @GetMapping(value = "/modificar/libros")
+    // public String modificar(ModelMap model) {
+    // model.addAttribute("libros", serviceLibro.buscarTodos());
+    // return "modificarLibros";
+    // }
 
     @PostMapping(value = "/modificar/libros")
-    public String modificarAutores(ModelMap model,
-                                   @RequestParam(value = "id", required = true) Long id,
-                                   @RequestParam(required = false) Long nuevoIsbn,
-                                   @RequestParam(required = false) String nuevoNombre,
-                                   @RequestParam(required = false) Integer nuevoAnio,
-                                   @RequestParam(required = false) Integer nuevoEjemplares,
-                                   @RequestParam(required = false) Integer nuevoEjemplaresPrestados,
-                                   @RequestParam(required = false) String nuevoAutor,
-                                   @RequestParam(required = false) String nuevoEditorial) throws LibroRepositoryExeption {
-
+    public String modificarAutores(ModelMap model, @RequestParam(value = "id", required = true) Long id,
+            @RequestParam(required = false) Long nuevoIsbn, @RequestParam(required = false) String nuevoNombre,
+            @RequestParam(required = false) Integer nuevoAnio, @RequestParam(required = false) Integer nuevoEjemplares,
+            @RequestParam(required = false) Integer nuevoEjemplaresPrestados,
+            @RequestParam(required = false) String nuevoAutor, @RequestParam(required = false) String nuevoEditorial)
+            throws LibroRepositoryExeption {
 
         try {
-            System.out.println(id);
             Libro libro = serviceLibro.buscaPorId(id);
-            System.out.println(libro.toString());
-            serviceLibro.modificar(libro, nuevoIsbn, nuevoNombre, nuevoAnio, nuevoEjemplares,
-                    nuevoEjemplaresPrestados, nuevoAutor, nuevoEditorial);
+            serviceLibro.modificar(libro, nuevoIsbn, nuevoNombre, nuevoAnio, nuevoEjemplares, nuevoEjemplaresPrestados,
+                    nuevoAutor, nuevoEditorial);
         } catch (Exception e) {
             model.put("error", e.getMessage());
             model.put("id", id);
@@ -108,7 +99,8 @@ public class LibroController {
     }
 
     @GetMapping(value = "/modificar/libros")
-    public String modificarId(@RequestParam(value = "id", required = false) String id, ModelMap model) throws LibroRepositoryExeption {
+    public String modificarId(@RequestParam(value = "id", required = false) String id, ModelMap model)
+            throws LibroRepositoryExeption {
         try {
             serviceLibro.buscaPorId(Long.parseLong(id));
         } catch (Exception e) {
@@ -141,7 +133,7 @@ public class LibroController {
     }
 
     private void mantieneDatosDeInputs(ModelMap model, Long isbn, String nombre, Integer anio, Integer ejemplares,
-                                       Integer ejemplaresPrestados, String autor, String editorial) {
+            Integer ejemplaresPrestados, String autor, String editorial) {
         model.put("isbn", isbn);
         model.put("nombre", nombre);
         model.put("anio", anio);

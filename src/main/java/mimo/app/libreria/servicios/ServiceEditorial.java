@@ -1,7 +1,6 @@
 package mimo.app.libreria.servicios;
 
 import mimo.app.libreria.entidades.Editorial;
-import mimo.app.libreria.exepciones.EditorialRepositoryException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

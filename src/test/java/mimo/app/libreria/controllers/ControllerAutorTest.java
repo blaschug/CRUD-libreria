@@ -1,6 +1,5 @@
 package mimo.app.libreria.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import mimo.app.libreria.repositorio.RepositoryAutor;
 import mimo.app.libreria.servicios.ServiceAutor;
 import org.junit.jupiter.api.Test;
@@ -20,9 +19,6 @@ public class ControllerAutorTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
     private ServiceAutor serviceAutor;
 
@@ -38,5 +34,5 @@ public class ControllerAutorTest {
     public void seleccionaBuscarEnIndex_retorna200() throws Exception {
         mockMvc.perform(get("/buscar")).andExpect(MockMvcResultMatchers.status().isOk());
     }
-    //Luego de estos test no supe como seguir
+    // Luego de estos test no supe como seguir
 }
