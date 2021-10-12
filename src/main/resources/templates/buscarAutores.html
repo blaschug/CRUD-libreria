@@ -54,7 +54,7 @@
                     <tr th:each="autor: ${autores}">
                         <td th:text="${autor.id}"></td>
                         <td th:text="${autor.nombre}"></td>
-                        <td><a href="" class="btn btn-light">Ver sus libros</a></td>
+                        <td><a th:href="@{'/buscar/libros?atributos=autor&buscador=' + ${autor.nombre}}" class="btn btn-light">Ver sus libros</a></td>
                     </tr>
                     </tbody>
                 </table>

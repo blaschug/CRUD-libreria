@@ -54,7 +54,7 @@
                     <tr th:each="editorial: ${editoriales}">
                         <td th:text="${editorial.id}"></td>
                         <td th:text="${editorial.nombre}"></td>
-                        <td><a href="" class="btn btn-light">Ver sus libros</a></td>
+                        <td><a th:href="@{'/buscar/libros?atributos=editorial&buscador=' + ${editorial.nombre}}" class="btn btn-light">Ver sus libros</a></td>
                     </tr>
                     </tbody>
                 </table>
